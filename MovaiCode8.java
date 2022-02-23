@@ -85,7 +85,7 @@ public class MovaiCode8{
                 }
             }
         } catch (CrepeExeptionnelle crepeExeptionnelle) {//ici c'est pour sortir du while(true); grâce à l'Exception aUnSuivant();
-
+            //ça sert simplement d'une sorte de goto
         }
 
         pile_de_crepes = stack.toArray(pile_de_crepes);//on met notre nouvelle pile de crepe à la place de l'ancienne (il s'agit du même tableau, de la même façon qu'on garderait la pile dans la même assiette après en avoir mangé une)
@@ -93,13 +93,35 @@ public class MovaiCode8{
     }
 
     public static void main(String[] args) throws Exception {
-        //ici j'ai mis des Integer mais par définition vous pouvez mettre n'importe quel type de crêpes, des Strings, des Boolean, des CrepesALaFraise, CrepesAuNutella voir même encore des CrepesExceptionnelle  mais là ça devient l'Inception des Exceptions.. une autre fois peut-être (dans les faits c'est pas possible puisqu'il s'agit d'une inner class de la fonction, mais écrite dans un fichier à part ça marcherait tout bien)
-        String[] array = new String[]{"Sucre citron","banane chocolat et chantilly","confiture abricot","crème de maron et chantilly"};
-        System.out.println(array);
-        //array = {0,1,2,3}
 
-        String[] array2 = mange_une_crepe(array);//(array2==array), on réutilise la même assiette, gare à la vaisselle
-        System.out.println(array2);
-        //array2 = {0,1,2}
+        class Crepe{
+            final String nom;
+            public Crepe(String nom) {
+                this.nom = nom;
+            }
+
+            @Override
+            public String toString() {
+                return nom;
+            }
+        }
+
+        //ici j'ai mis des Crepe mais par définition vous pouvez mettre n'importe quel type de crêpes, des Strings, des Boolean, des CrepesALaFraise, CrepesAuNutella voir même encore des CrepesExceptionnelle  mais là ça devient l'Inception des Exceptions.. une autre fois peut-être.. (dans les faits c'est pas possible puisqu'il s'agit d'une inner class de la fonction, mais écrite dans un fichier à part ça marcherait tout bien)
+        Crepe[] assiette_de_crepes = new Crepe[]{
+                new Crepe("Sucre citron"),
+                new Crepe("banane chocolat et chantilly"),
+                new Crepe("confiture abricot"),
+                new Crepe("crème de maron et chantilly")};
+        for(Crepe crepe : assiette_de_crepes){
+            System.out.print(crepe+",");
+        }
+        System.out.println();
+        //Sucre citron,banane chocolat et chantilly,confiture abricot,crème de maron et chantilly,
+
+        Crepe[] assiette_de_crepes2 = mange_une_crepe(assiette_de_crepes);//(assiette_de_crepes2==assiette_de_crepes), on réutilise la même assiette, gare à la vaisselle
+        for(Crepe crepe : assiette_de_crepes2){
+            System.out.print(crepe+",");
+        }
+        //Sucre citron,banane chocolat et chantilly,confiture abricot,null,
     }
 }
